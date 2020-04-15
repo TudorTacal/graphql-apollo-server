@@ -43,7 +43,7 @@ const typeDefs = gql`
     findPerson(name: String!): Person
   }
 
-  type Person {
+  type Mutation {
     addPerson(
       name: String!
       phone: String
@@ -65,6 +65,13 @@ const resolvers = {
         street: root.street,
         city: root.city,
       };
+    },
+  },
+  Mutation: {
+    addPerson: (root, args) => {
+      const person = { ...args, id: uuid() };
+      persons = persons.concat(person);
+      return person;
     },
   },
 };
