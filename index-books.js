@@ -124,6 +124,7 @@ const resolvers = {
     bookCount: () => books.length,
     authorCount: () => authors.length,
     allBooks: (root, args) => {
+      if (args.genre === 'ALL') return books;
       return books.filter((book) => book.genres.includes(args.genre));
     },
     allAuthors: () => {
